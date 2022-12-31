@@ -43,13 +43,13 @@ const Game = () => {
     paramBonus.length > 0 ? (newSettings.bonus = paramBonus) : null;
     paramImg.length > 0 ? (newSettings.img = paramImg) : null;
     paramBg.length > 0
-      ? isColor(paramBg.length)
+      ? isColor(paramBg)
         ? (newSettings.bg = paramBg)
         : null
       : null;
     paramColor.length > 0
-      ? isColor(paramBg.length)
-        ? (newSettings.color = paramColor)
+      ? isColor(paramColor)
+        ? (newSettings.btn_color = paramColor)
         : null
       : null;
 
