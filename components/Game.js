@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Router from "next/router";
 import { Phrases } from "./";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BiCopy } from "react-icons/bi";
 import styles from "../styles/Game.module.css";
 
 const Game = () => {
@@ -19,6 +20,7 @@ const Game = () => {
   });
   const [settings, setSettings] = useState({});
   const [image, setImage] = useState("");
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
     // Set default settings
@@ -54,6 +56,7 @@ const Game = () => {
     // Set settings status
     setSettings(newSettings);
     setImage(newSettings.img);
+    setUrl(window.location.href);
   }, []);
 
   //Validate if color exists
@@ -113,12 +116,28 @@ const Game = () => {
     changeHomePosition();
   };
 
+  const copyUrl = (e) => {
+    navigator.clipboard.writeText(url);
+    alert("Link copied! Share it!");
+  };
+
   return (
     <div
       className={`${styles.container}`}
       style={{ backgroundColor: `${settings.bg}` }}
     >
       <div className={`${styles.container_box}`}>
+        <div
+          className={`${styles.container_copy}`}
+          onClick={copyUrl}
+          style={{
+            color: `${getColor(settings.bg)}`,
+            border: `${getColor(settings.bg)} solid 1px`,
+          }}
+        >
+          <p className={`${styles.container_url}`}>{url}</p>
+          <BiCopy />
+        </div>
         <div
           className={`${styles.btn_home}`}
           style={{ top: homePosition.top, right: homePosition.right }}
